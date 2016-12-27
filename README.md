@@ -16,6 +16,7 @@ Chris Venter	chris.venter@gmail.com	http://rocketpod.blogspot.com
 Major changes:
 --------------
 
+- Line breaks disabled by default
 - Include fixed for iOS build
 
 Other versions:
