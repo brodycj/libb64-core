@@ -11,9 +11,8 @@ Public domain
 Authors:
 --------
 
-Chris Venter	chris.venter@gmail.com	http://rocketpod.blogspot.com
-
-Christopher J. Brody <brodybits@litehelpers.net>
+- Chris Venter ([@gorb314](https://github.com/gorb314))
+- Christopher J. Brody ([@brodybits](https://github.com/brodybits))
 
 Major changes:
 --------------
