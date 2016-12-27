@@ -13,9 +13,12 @@ Authors:
 
 Chris Venter	chris.venter@gmail.com	http://rocketpod.blogspot.com
 
+Christopher J. Brody <brodybits@litehelpers.net>
+
 Major changes:
 --------------
 
+- Use macro instead of function to encode each value
 - Line breaks disabled by default
 - Include fixed for iOS build
 

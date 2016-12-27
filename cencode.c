@@ -11,6 +11,10 @@ For details, see http://sourceforge.net/projects/libb64
 const int CHARS_PER_LINE = 72;
 #endif
 
+static const char * ENCODING_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+#define ENCODE_VALUE(value) (((value) < 0 || (value) > 63) ? '=' : (ENCODING_CHARS[(int)(value)]))
+
 void base64_init_encodestate(base64_encodestate* state_in)
 {
 	state_in->step = step_A;
@@ -20,9 +24,7 @@ void base64_init_encodestate(base64_encodestate* state_in)
 
 char base64_encode_value(char value_in)
 {
-	static const char* encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-	if (value_in > 63) return '=';
-	return encoding[(int)value_in];
+	return ENCODE_VALUE(value_in);
 }
 
 int base64_encode_block(const char* plaintext_in, int length_in, char* code_out, base64_encodestate* state_in)
@@ -48,7 +50,7 @@ int base64_encode_block(const char* plaintext_in, int length_in, char* code_out,
 			}
 			fragment = *plainchar++;
 			result = (fragment & 0x0fc) >> 2;
-			*codechar++ = base64_encode_value(result);
+			*codechar++ = ENCODE_VALUE(result);
 			result = (fragment & 0x003) << 4;
 	case step_B:
 			if (plainchar == plaintextend)
@@ -59,7 +61,7 @@ int base64_encode_block(const char* plaintext_in, int length_in, char* code_out,
 			}
 			fragment = *plainchar++;
 			result |= (fragment & 0x0f0) >> 4;
-			*codechar++ = base64_encode_value(result);
+			*codechar++ = ENCODE_VALUE(result);
 			result = (fragment & 0x00f) << 2;
 	case step_C:
 			if (plainchar == plaintextend)
@@ -70,9 +72,9 @@ int base64_encode_block(const char* plaintext_in, int length_in, char* code_out,
 			}
 			fragment = *plainchar++;
 			result |= (fragment & 0x0c0) >> 6;
-			*codechar++ = base64_encode_value(result);
+			*codechar++ = ENCODE_VALUE(result);
 			result  = (fragment & 0x03f) >> 0;
-			*codechar++ = base64_encode_value(result);
+			*codechar++ = ENCODE_VALUE(result);
 
 			++(state_in->stepcount);
 #ifdef B64_ENCODE_LINE_BREAKS
@@ -95,12 +97,12 @@ int base64_encode_blockend(char* code_out, base64_encodestate* state_in)
 	switch (state_in->step)
 	{
 	case step_B:
-		*codechar++ = base64_encode_value(state_in->result);
+		*codechar++ = ENCODE_VALUE(state_in->result);
 		*codechar++ = '=';
 		*codechar++ = '=';
 		break;
 	case step_C:
-		*codechar++ = base64_encode_value(state_in->result);
+		*codechar++ = ENCODE_VALUE(state_in->result);
 		*codechar++ = '=';
 		break;
 	case step_A:
