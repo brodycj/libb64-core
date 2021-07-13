@@ -1,7 +1,10 @@
-libb64: Base64 Encoding C Routine
-=================================
+libb64: Base64 C Routines
+=========================
 
-From project: <http://libb64.sourceforge.net/> (latest CVS source from <http://libb64.cvs.sourceforge.net/viewvc/libb64/>)
+From projects:
+
+- <https://github.com/gorb314/libb64>
+- <http://libb64.sourceforge.net/> (latest CVS source from <http://libb64.cvs.sourceforge.net/viewvc/libb64/>)
 
 LICENSE:
 --------
@@ -18,8 +21,8 @@ Major changes:
 --------------
 
 - Use macro instead of function to encode each value
-- Line breaks disabled by default
-- Include fixed for iOS build
+- Line breaks disabled in cencode.c by default
+- Flatter include statements to make iOS build easier
 
 Other versions:
 ---------------
