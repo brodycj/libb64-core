@@ -24,4 +24,5 @@ Major changes:
 Other versions:
 ---------------
 
+- <https://github.com/gorb314/libb64>
 - <https://github.com/libb64/libb64>
